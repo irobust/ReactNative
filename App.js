@@ -1,8 +1,13 @@
 import { createStackNavigator } from 'react-navigation';
 import ProductList from './app/components/ProductList';
 import ProductDetail from './app/components/ProductDetail';
+import ProductForm from './app/components/ProductForm';
+import Parent from './app/components/Parent';
 
 export default createStackNavigator({
+  demo:{
+    screen: Parent
+  },
   list: {
     screen: ProductList,
     navigationOptions: () => ({
@@ -14,6 +19,9 @@ export default createStackNavigator({
     navigationOptions: () => ({
       title: 'Product Detail'
     })
+  },
+  form: {
+    screen: ProductForm
   }
 });
 

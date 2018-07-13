@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, FlatList, Text } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { getProducts } from '../services/product';
+import { List, ListItem } from 'react-native-elements';
+import ActionButton from 'react-native-action-button';
 
 class ProductList extends React.Component {
     state = { products: [] }
@@ -19,22 +21,39 @@ class ProductList extends React.Component {
         );
     }
 
-    handlePressButton = () => {
+    handlePressItem = (product) => {
         this.props.navigation.navigate('detail', {
-            'msg' : 'Message from Product List'
+            'msg' : 'Message from Product List',
+            'product': product
         });
+    }
+
+    handleAddProduct = () => {
+        this.props.navigation.navigate('form');
     }
 
     render() {
       const products = this.state.products;
-      return (
-        <FlatList 
-            data = {this.state.products}
-            renderItem = {({ item }) => { console.log(item); return (
-                <Text>{item.name}</Text>
-            )}}
-        />
-      );
+      return [
+            <List key='productlist' containerStyle={{ marginTop: 20 }}>
+            {
+                products.map((product, index) => (
+                    <ListItem
+                        onPress={() => { this.handlePressItem(product) }}
+                        roundAvatar
+                        avatar={{ uri:product.image }}
+                        key={index}
+                        title={product.name}
+                    />
+                ))
+            }
+            </List>,
+            <ActionButton
+                key="fab"
+                buttonColor="rgba(231, 76, 60, 1)"
+                onPress={this.handleAddProduct}
+            ></ActionButton>
+      ];
     }
   }
 

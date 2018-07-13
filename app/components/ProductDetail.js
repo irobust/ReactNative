@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, Image } from 'react-native';
 
 class ProductDetail extends React.Component {
     goHome = () => {
@@ -8,11 +8,14 @@ class ProductDetail extends React.Component {
     render() {
       const { navigation }  = this.props;
       const message = navigation.getParam('msg');
+      const product = navigation.getParam('product');
+
       return [
             <Text>Product Detail</Text>,
             <Button title="Home"
                     onPress={this.goHome} />,
-            <Text>{message}</Text>
+            <Text>{product.name}</Text>,
+            <Image source={{uri: product.image}} />
       ];
     }
   }
