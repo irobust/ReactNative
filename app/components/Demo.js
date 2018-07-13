@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Button, StyleSheet } from 'react-native';
+import { Text, Button, StyleSheet, View } from 'react-native';
 
 class Demo extends Component {
     state = { visibility: true,
@@ -7,14 +7,12 @@ class Demo extends Component {
 
     render() {
         return [
-            <Text> Demo </Text>,
-            <Text 
+            <Text key={1}> Demo </Text>,
+            <Text key={2} 
                 style={styles[`GAME_${this.state.gameStatus}`]} 
             >Game Status</Text>,
-            <Text>{this.props.currentId}</Text>,
-            <Button title="Reset" onPress={
-                () => {this.props.reset()}
-            } />
+            <Text key={3}>{this.props.currentId}</Text>,
+            <View key={4}>{ this.state.visibility && <Button title="Reset" onPress={this.props.reset} />}</View>
         ];
     }
 }
